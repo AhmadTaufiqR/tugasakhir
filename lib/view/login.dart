@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:tugasakhir/component/textinput.dart';
@@ -22,21 +23,17 @@ class _loginpageState extends State<loginpage> {
       'username': username,
       'password': pass,
     };
-
     var respons =
         await http.post(Uri.parse("http://10.0.2.2/api/login.php"), body: data);
+    // print(respons.body);
+    var uji = jsonEncode(jsonDecode(respons.body));
 
-    print(respons.body);
-
-    if (respons.statusCode == 200) {
-      print('anda berhasil masuk');
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => home(),
-          ));
-    } else {
-      print('ada yang salah');
+    if (uji.contains('Sukses')) {
+      _showerrorDialog('Anda Berhasil Login');
+    } else if (uji.contains('Username_salah')) {
+      _showerrorDialog('Username Yang Anda Masukkan Salah');
+    } else if (uji.contains('Password_salah')) {
+      _showerrorDialog("Password Yang Anda Masukkan Salah");
     }
   }
 
@@ -84,5 +81,34 @@ class _loginpageState extends State<loginpage> {
         ],
       ),
     )));
+  }
+
+  void _showerrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(
+          'Login',
+          style: TextStyle(color: Colors.blue),
+        ),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Okay'),
+            onPressed: () {
+              if (message == 'Anda Berhasil Login') {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => home(),
+                    ));
+              } else {
+                Navigator.of(context).pop();
+              }
+            },
+          )
+        ],
+      ),
+    );
   }
 }
