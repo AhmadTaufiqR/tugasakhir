@@ -1,0 +1,28 @@
+import 'package:flutter/material.dart';
+
+class home extends StatefulWidget {
+  const home({Key? key}) : super(key: key);
+
+  @override
+  State<home> createState() => _homeState();
+}
+
+class _homeState extends State<home> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Dashboard"),
+        actions: const [],
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [],
+          ),
+        ),
+      ),
+    );
+  }
+}
