@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugasakhir/view/login.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -9,6 +10,37 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController usernameC = TextEditingController();
+  TextEditingController passwordC = TextEditingController();
+  TextEditingController fullnameC = TextEditingController();
+  TextEditingController emailC = TextEditingController();
+  TextEditingController teleponC = TextEditingController();
+
+  SignUp(String user, pass, email, full, telepon) async {
+    Map data = {
+      'username': user,
+      'password': pass,
+      'email': email,
+      'nama_lengkap': full,
+      'telepon': telepon,
+    };
+
+    var respons = await http.post(Uri.parse('http://10.0.2.2/api/register.php'),
+        body: data);
+
+    if (respons.statusCode == 200) {
+      print('Anda Berhasil Login');
+      print(respons.body);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => loginpage(),
+          ));
+    } else {
+      print('Ada yang salah');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.all(12),
                       margin: const EdgeInsets.only(),
                       child: TextFormField(
-                        initialValue: 'John Doe',
+                        controller: usernameC,
                         maxLength: 40,
                         decoration: const InputDecoration(
                           labelText: 'Username',
@@ -52,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.all(12),
                       margin: const EdgeInsets.only(),
                       child: TextFormField(
-                        initialValue: '12345',
+                        controller: passwordC,
                         maxLength: 6,
                         decoration: const InputDecoration(
                           labelText: 'Password',
@@ -76,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.all(12),
                       margin: const EdgeInsets.only(),
                       child: TextFormField(
-                        initialValue: 'taufiq@gmail.com',
+                        controller: emailC,
                         maxLength: 50,
                         decoration: const InputDecoration(
                           labelText: 'Email',
@@ -100,7 +132,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.all(12),
                       margin: const EdgeInsets.only(),
                       child: TextFormField(
-                        initialValue: 'Taufiq Ridoi',
+                        controller: fullnameC,
                         maxLength: 30,
                         decoration: const InputDecoration(
                           labelText: 'Full Name',
@@ -124,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.all(12),
                       margin: const EdgeInsets.only(),
                       child: TextFormField(
-                        initialValue: '12345678',
+                        controller: teleponC,
                         maxLength: 50,
                         decoration: const InputDecoration(
                           labelText: 'telepone',
@@ -155,11 +187,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     backgroundColor: Colors.blueGrey,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => loginpage(),
-                        ));
+                    SignUp(usernameC.text, passwordC.text, emailC.text,
+                        fullnameC.text, teleponC.text);
                   },
                   child: const Text("Register"),
                 ),
