@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tugasakhir/component/textinput.dart';
 import 'package:tugasakhir/view/home.dart';
 import 'package:tugasakhir/view/register.dart';
 import 'package:http/http.dart' as http;
@@ -42,82 +43,46 @@ class _loginpageState extends State<loginpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Form(
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.only(),
-                      child: TextFormField(
-                        controller: username,
-                        maxLength: 40,
-                        decoration: const InputDecoration(
-                          labelText: 'Username',
-                          labelStyle: TextStyle(
-                            color: Colors.blueGrey,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          helperText: "Type your username",
-                        ),
-                        onChanged: (value) {},
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.only(),
-                      child: TextFormField(
-                        controller: password,
-                        maxLength: 6,
-                        decoration: const InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: TextStyle(
-                            color: Colors.blueGrey,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          helperText: "Type your password",
-                        ),
-                        onChanged: (value) {},
-                      ),
-                    ),
-                  ],
+        body: SingleChildScrollView(
+            child: Container(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        children: [
+          Form(
+            child: Column(
+              children: [
+                textinput(
+                    controllerText: username,
+                    helper: "Type Your Username",
+                    label: "Username"),
+                SizedBox(
+                  height: 20,
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                height: 35,
-                width: 150,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueGrey,
+                textinput(
+                    controllerText: password,
+                    helper: "Type Your Password",
+                    label: "Password"),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  height: 35,
+                  width: 150,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueGrey,
+                    ),
+                    onPressed: () {
+                      signIn(username.text, password.text);
+                    },
+                    child: const Text("Login"),
                   ),
-                  onPressed: () {
-                    signIn(username.text, password.text);
-                  },
-                  child: const Text("Login"),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
-    );
+    )));
   }
 }

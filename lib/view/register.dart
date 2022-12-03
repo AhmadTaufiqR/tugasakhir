@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tugasakhir/component/textinput.dart';
 import 'package:tugasakhir/view/login.dart';
 import 'package:http/http.dart' as http;
 
@@ -56,123 +57,38 @@ class _RegisterPageState extends State<RegisterPage> {
               Form(
                 child: Column(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.only(),
-                      child: TextFormField(
-                        controller: usernameC,
-                        maxLength: 40,
-                        decoration: const InputDecoration(
-                          labelText: 'Username',
-                          labelStyle: TextStyle(
-                            color: Colors.blueGrey,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          helperText: "Type your username",
-                        ),
-                        onChanged: (value) {},
-                      ),
-                    ),
+                    textinput(
+                        controllerText: usernameC,
+                        helper: "type Your Username",
+                        label: "Username"),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.only(),
-                      child: TextFormField(
-                        controller: passwordC,
-                        maxLength: 6,
-                        decoration: const InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: TextStyle(
-                            color: Colors.blueGrey,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          helperText: "Type your password",
-                        ),
-                        onChanged: (value) {},
-                      ),
-                    ),
+                    textinput(
+                        controllerText: passwordC,
+                        helper: "type Your Password",
+                        label: "Password"),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.only(),
-                      child: TextFormField(
-                        controller: emailC,
-                        maxLength: 50,
-                        decoration: const InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(
-                            color: Colors.blueGrey,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          helperText: "Type your email",
-                        ),
-                        onChanged: (value) {},
-                      ),
-                    ),
+                    textinput(
+                        controllerText: emailC,
+                        helper: "type Your Email",
+                        label: "Email"),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.only(),
-                      child: TextFormField(
-                        controller: fullnameC,
-                        maxLength: 30,
-                        decoration: const InputDecoration(
-                          labelText: 'Full Name',
-                          labelStyle: TextStyle(
-                            color: Colors.blueGrey,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          helperText: "Type your fullname",
-                        ),
-                        onChanged: (value) {},
-                      ),
-                    ),
+                    textinput(
+                        controllerText: fullnameC,
+                        helper: "type Your Full Name",
+                        label: "Full Name"),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.only(),
-                      child: TextFormField(
-                        controller: teleponC,
-                        maxLength: 50,
-                        decoration: const InputDecoration(
-                          labelText: 'telepone',
-                          labelStyle: TextStyle(
-                            color: Colors.blueGrey,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          helperText: "Type your telepone",
-                        ),
-                        onChanged: (value) {},
-                      ),
-                    ),
+                    textinput(
+                        controllerText: teleponC,
+                        helper: "type Your Telepon",
+                        label: "Telepon"),
                   ],
                 ),
               ),
